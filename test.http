@@ -1,0 +1,29 @@
+POST http://localhost:5000/auth/createUser
+Content-Type: application/json
+
+{
+  "fullName": "wout kenny",
+  "email": "woutkenny@gmail.com",
+  "password": "securePassword123"
+}
+
+###
+
+POST http://localhost:5000/auth/verify
+Content-Type: application/json
+
+{
+  "email": "woutkenny@gmail.com",
+  "otp" : "4107",
+  "purpose" : "verify-email"
+}
+
+####
+
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email" : "woutkenny@gmail.com",
+  "password" : "securePassword123"
+}
