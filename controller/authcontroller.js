@@ -13,7 +13,7 @@ const User = require('../schema/userschema');
 
 
 
-const JWT_key = process.env.JWT_secrete_key;
+const JWT_key = process.env.JWT_SECRET_KEY;
 
 const newUser = async (req, res) => {
   try {
@@ -50,7 +50,8 @@ smtp.sendMail({
   } else {
     console.log('Email sent successfully:', info.response);
   }
-})
+}) 
+
 
 const payload = {
     userId: newUser._id,
