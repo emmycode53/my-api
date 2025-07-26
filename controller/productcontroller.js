@@ -8,7 +8,8 @@ const addProducts = async (req, res) => {
   try {
     const files = req.files;
     const ownerId = req.user?.ownerId; 
-    
+    console.log('➡️ Received files:', req.files);
+
 
     const { title, description, price, stockStatus} = req.body;
 

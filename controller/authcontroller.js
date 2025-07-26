@@ -13,7 +13,7 @@ const User = require('../schema/userschema');
 
 
 
-const JWT_key = process.env.JWT_SECRET_KEY;
+const jwtkey = process.env.JWT_SECRET_KEY;
 
 const newUser = async (req, res) => {
   try {
@@ -59,7 +59,7 @@ const payload = {
     role: newUser.role
   };
 
-  const token = jwt.sign(payload, JWT_key)
+  const token = jwt.sign(payload, jwtkey)
 
     res.status(201).json({ message: 'User created successfully, an OTP has been sent to your email', fullName,token });
   } catch (error) {
