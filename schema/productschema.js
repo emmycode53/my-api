@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const brand = require('./brandshema');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 const productSchema = new mongoose.Schema({
@@ -14,6 +16,10 @@ const productSchema = new mongoose.Schema({
   imageUrls:{
     type : [String]
   },
+  brand:{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'Brands'
+  },
   stoctStatus:{
    type : String 
   },
@@ -27,5 +33,6 @@ const productSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+productSchema.plugin(mongoosePaginate)
 
 module.exports = mongoose.model('Product', productSchema);

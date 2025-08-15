@@ -1,10 +1,12 @@
-POST http://localhost:5000/auth/createUser
+
+POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-  "fullName": "wout kenny",
-  "email": "woutkenny@gmail.com",
-  "password": "securePassword123"
+  "fullName" : "Isaac Emmanuel",
+    "email" : "isaacemmanuel1913@gmail.com",
+    "password" : "mysecurepassword",
+    "role" : "admin"
 }
 
 ###
@@ -13,17 +15,32 @@ POST http://localhost:5000/auth/verify
 Content-Type: application/json
 
 {
-  "email": "woutkenny@gmail.com",
-  "otp" : "4107",
-  "purpose" : "verify-email"
+   "email" : "isaacemmanuel1913@gmail.com",
+    "otp" : 9280,
+    "purpose" : "verify-email"
 }
 
-####
+###
 
 POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-  "email" : "woutkenny@gmail.com",
-  "password" : "securePassword123"
+   "email" : "isaacemmanuel1913@gmail.com",
+    "password" : "mysecurepassword"
 }
+
+###
+
+POST http://localhost:5000/brands
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODllOGRhNTU4YzQ4YWU0MTJhYWIwYmUiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTIyMTg1N30.HopwRsq_oYbUNMc4-v1vFbZdg6GN6bovcHAw4W1DC5w
+
+{
+  "brandName": "Dolce & Gaban"
+}
+
+
+###
+
+POST http://localhost:5000/products

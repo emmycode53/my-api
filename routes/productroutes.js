@@ -30,4 +30,6 @@ productRoutes.get('/', products.getAllProducts);
 
 productRoutes.post('/',authenticateUser,authorizeUsers,  upload.array('files'), products.addProducts);
 
+productRoutes.get('/:brand/:page/:limit', products.getProductsByBrand);
+
 module.exports = productRoutes;
