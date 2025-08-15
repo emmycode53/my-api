@@ -61,7 +61,7 @@ const getProductsByBrand = async (req, res) => {
       populate: 'brand'
     };
 
-    const result = await Product.paginate({ brand }, options);
+    const result = await productSchema.paginate({ brand }, options);
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
