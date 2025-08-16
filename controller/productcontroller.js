@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose')
+const brandCollection = require('../schema/brandshema');
 
 
  const productSchema = require('../schema/productschema'); 
@@ -11,12 +13,17 @@ const addProducts = async (req, res) => {
     console.log('➡️ Received files:', req.files);
 
 
-    const { title, description, price, stockStatus, brand} = req.body;
+    const { title, description, price, stockStatus, brandName} = req.body;
+
+   const existingBrand = await brandCollection.findOne({brandName})
+    if (!existingBrand) {
+      return res.status(400).json({ message: 'Brand does not exist. Please add it first.' });
+    }
 
     console.log("req.body:", req.body);
 
-    if (!files || !title || !description || !price || !stockStatus || !brand) {
-      return res.status(400).json({ message: 'brand,Title, description,price,stockStus and file are required' });
+    if (!files || !title || !description || !price || !stockStatus || !brandName) {
+      return res.status(400).json({ message: 'all fields are required' });
     }
 
      const imageUrls = await uploadMultipleFiles(files);
@@ -27,7 +34,7 @@ const addProducts = async (req, res) => {
       price,
       stockStatus,
       imageUrls,
-      brand,
+      brand: existingBrand._id,
       ownerId
     });
 
@@ -52,21 +59,32 @@ const getAllProducts = async (req, res) => {
 
 
 
+
+
 const getProductsByBrand = async (req, res) => {
   const { brand, page, limit } = req.params;
   try {
+    
+    const existingBrand = await brandCollection.findOne({ brandName: brand });
+    if (!existingBrand) {
+      return res.status(404).json({ message: 'Brand not found' });
+    }
+
+    
     const options = {
-      page: parseInt(page),
-      limit: parseInt(limit),
+      page: parseInt(page) || 1,
+      limit: parseInt(limit) || 10,
       populate: 'brand'
     };
 
-    const result = await productSchema.paginate({ brand }, options);
+    const result = await productSchema.paginate({ brand: existingBrand._id }, options);
     res.json(result);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 module.exports = {
   addProducts,
