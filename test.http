@@ -43,4 +43,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODllO
 
 ###
 
-GET  http://localhost:5000/brands
+DELETE    http://localhost:5000/brands/68a113489a91b446ab3e9f82
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODllOGRhNTU4YzQ4YWU0MTJhYWIwYmUiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTIyMTg1N30.HopwRsq_oYbUNMc4-v1vFbZdg6GN6bovcHAw4W1DC5w
+

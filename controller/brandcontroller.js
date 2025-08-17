@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const brandModel = require('../schema/brandshema');
+const ProductModel = require('../schema/productschema')
 
 addBrand = async (req, res) => {
   try {
@@ -34,7 +35,7 @@ getBrands = async (req, res) => {
 
 deleteBrand = async (req, res) => {
 try {
-const brandId = req.param.id;
+const brandId = req.params.id;
 const brand = await brandModel.findById(brandId);
 if(!brand){
 return res.status(401).send({message:'brand not found'});
