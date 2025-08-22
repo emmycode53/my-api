@@ -32,12 +32,21 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/brands
+POST   http://localhost:5000/order
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODllOGRhNTU4YzQ4YWU0MTJhYWIwYmUiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTIyMTg1N30.HopwRsq_oYbUNMc4-v1vFbZdg6GN6bovcHAw4W1DC5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTg3MjkxN30.mQsgypO9B8gGHZ2I9hfs7f89GlEL0e6jvp1W60dfNsU
 
 {
-  "brandName": "Dolce & Gaban"
+    "item": [
+       {
+         "productId": "68a85c333c911b2c384ba6d7",
+        "quantity": 3
+       },
+       {
+         "productId": "68a122c214c8d4889bf0e1d0",
+        "quantity": 3
+       }
+    ]
 }
 
 
@@ -47,3 +56,25 @@ DELETE    http://localhost:5000/brands/68a113489a91b446ab3e9f82
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODllOGRhNTU4YzQ4YWU0MTJhYWIwYmUiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTIyMTg1N30.HopwRsq_oYbUNMc4-v1vFbZdg6GN6bovcHAw4W1DC5w
 
+
+###
+
+GET http://localhost:5000/order
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTg3MzQzOH0.w6M9zKjgQwFTSmI6z-DgMu8ggC34TxMYxGkcufAC-k8
+
+###
+
+PATCH http://localhost:5000/order/68a87b1b175af6694f7d374e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTg3MzQzOH0.w6M9zKjgQwFTSmI6z-DgMu8ggC34TxMYxGkcufAC-k8
+
+{
+  "shippingStatus": "shipped"
+}
+
+###
+
+GET http://localhost:5000/order/68a87b1b175af6694f7d374e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTg3MzQzOH0.w6M9zKjgQwFTSmI6z-DgMu8ggC34TxMYxGkcufAC-k8 

@@ -13,7 +13,7 @@ const itemsSchema =new mongoose.Schema({
     },
     ownerId :{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'user',
+        ref : 'User',
         required : true
     },
     quantity :{
@@ -35,7 +35,7 @@ const itemsSchema =new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
     customerId :{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'user',
+        ref : 'User',
         required : true
     },
     item : [itemsSchema],

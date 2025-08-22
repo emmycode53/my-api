@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const productModel = require('../schema/productschema');
-const orderModel = require('../schema/order');
-const { promises } = require('nodemailer/lib/xoauth2');
+const orderModel = require('../schema/order')
+
 
 const createOrder = async (req,res)=>{
     try {
@@ -10,6 +10,7 @@ const createOrder = async (req,res)=>{
         if(!item || item.length===0){
             return res.status(400).send({message:'order should at least contain one item'});
         }
+
         const orderedItems = await Promise.all(item.map (async (i)=>{
            const product= await productModel.findById(i.productId);
            if(!product){
@@ -18,7 +19,7 @@ const createOrder = async (req,res)=>{
            return{
             productName : product.title,
             productId : i.productId,
-            ownerId : product.ownerId,
+            ownerId : req.user.userId,
             quantity : i.quantity,
             totalCost : product.price * i.quantity
 
@@ -58,10 +59,11 @@ const getAllOrder = async (req, res) => {
 
 const getOrderById = async (req, res) =>{
     try {
-        const order = await orderModel.findById(req.params.id).populate('customerId', 'name email').populate('item.productId', 'name price');
+        const order = await orderModel.findById(req.params.id).populate('customerId', 'name email').populate('item.productId', 'title price');
         if(!order){
             return res.status(400).send({message: 'order not found'})
         }
+        return res.status(200).send(order);
     } catch (error) {
        return res.status(500).send({message: 'error fetching order', error: error.message});
     }
@@ -69,10 +71,10 @@ const getOrderById = async (req, res) =>{
 
 const updateShippingStatus = async (req, res) => {
   try {
-    const { status } = req.body;
+    const { shippingStatus } = req.body;
 
     
-    if (!['pending', 'shipped', 'delivered'].includes(status)) {
+    if (!['pending', 'shipped', 'delivered'].includes(shippingStatus)) {
       return res.status(400).send({ message: 'Invalid status' });
     }
 
@@ -82,7 +84,7 @@ const updateShippingStatus = async (req, res) => {
     }
 
     order.item = order.item.map(item => {
-      item.shippingStatus = status;
+      item.shippingStatus = shippingStatus;
       return item;
     });
 
