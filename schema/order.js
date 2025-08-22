@@ -26,7 +26,7 @@ const itemsSchema =new mongoose.Schema({
     },
     shippingStatus :{
         type : String,
-        enum: ['pendin', 'shipped', 'delivered'],
+        enum: ['pending', 'shipped', 'delivered'],
         default : 'pending'
     }
 

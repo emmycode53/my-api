@@ -6,7 +6,7 @@ const { promises } = require('nodemailer/lib/xoauth2');
 const createOrder = async (req,res)=>{
     try {
         const {item} = req.body;
-        const customerId = req.user._id;
+        const customerId = req.user.userId;
         if(!item || item.length===0){
             return res.status(400).send({message:'order should at least contain one item'});
         }
