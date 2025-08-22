@@ -5,7 +5,7 @@ const authenticateUser = require('../utilities/authenticatetoken');
 const isAdmin = require('../utilities/authorization');
 
 const  isCustomer=(req, res, next)=>{
-if(req.user.role === ! customer){
+if(req.user.role === ! "customer"){
     return res.status(403).send({message:'only customers are allowed to use this route'});
 }
 next();
