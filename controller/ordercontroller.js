@@ -10,17 +10,17 @@ const createOrder = async (req,res)=>{
         if(!item || item.length===0){
             return res.status(400).send({message:'order should at least contain one item'});
         }
-        const orderedItems = await promise.all(item.map (async (i)=>{
-           const product= await productModel.findById(i.prodcutId);
+        const orderedItems = await Promise.all(item.map (async (i)=>{
+           const product= await productModel.findById(i.productId);
            if(!product){
-            throw new Error(`product with ${i.prodcutId} not found`)
+            throw new Error(`product with ${i.productId} not found`)
            }
            return{
-            prodcutName : product.productName,
-            productId : i.prodcutId,
-            ownerId : i.ownerId,
+            productName : product.title,
+            productId : i.productId,
+            ownerId : product.ownerId,
             quantity : i.quantity,
-            totalCost : i.totalCost
+            totalCost : product.price * i.quantity
 
            }
         }))
@@ -29,7 +29,7 @@ const createOrder = async (req,res)=>{
             customerId,
             item : orderedItems
            });
-           order.save();
+           await order.save();
 
            res.status(200).send({message:'order created successfully'});
 
