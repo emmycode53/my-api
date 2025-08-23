@@ -6,13 +6,16 @@ const brandCollection = require('../schema/brandshema');
  const productSchema = require('../schema/productschema'); 
 const { uploadSingleFile, uploadMultipleFiles } = require('../tigrisconfig'); 
 
+
+
+
 const addProducts = async (req, res) => {
   try {
+
+    const ownerId = req.user.userId
+     console.log("➡️ ownerId being saved:", ownerId)
     const files = req.files;
-    const ownerId = req.user?.ownerId; 
-    console.log('➡️ Received files:', req.files);
-
-
+    
     const { title, description, price, stockStatus, brandName} = req.body;
 
    const existingBrand = await brandCollection.findOne({brandName})
@@ -31,7 +34,7 @@ const addProducts = async (req, res) => {
     const newProduct = new productSchema({
       title,
       description,
-      price,
+      price: Number(price),
       stockStatus,
       imageUrls,
       brand: existingBrand._id,

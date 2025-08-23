@@ -25,9 +25,11 @@ const productSchema = new mongoose.Schema({
   },
 
   ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "User",   
+  required: true
   },
+
   createdAt: {
     type: Date,
     default: Date.now

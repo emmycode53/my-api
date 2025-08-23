@@ -39,12 +39,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4N
 {
     "item": [
        {
-         "productId": "68a85c333c911b2c384ba6d7",
-        "quantity": 3
+         "productName": "Gucci mini GG bag",
+        "quantity": 1
        },
        {
-         "productId": "68a122c214c8d4889bf0e1d0",
-        "quantity": 3
+         "productName": "prada jacket",
+        "quantity": 2
        }
     ]
 }

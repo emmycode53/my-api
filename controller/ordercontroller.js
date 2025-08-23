@@ -11,19 +11,37 @@ const createOrder = async (req,res)=>{
             return res.status(400).send({message:'order should at least contain one item'});
         }
 
-        const orderedItems = await Promise.all(item.map (async (i)=>{
-           const product= await productModel.findById(i.productId);
-           if(!product){
-            throw new Error(`product with ${i.productId} not found`)
-           }
-           return{
-            productName : product.title,
-            productId : i.productId,
-            ownerId : req.user.userId,
-            quantity : i.quantity,
-            totalCost : product.price * i.quantity
+        
+    const orderedItems = await Promise.all(
+      item.map(async (i) => {
+        
 
-           }
+        let product;
+
+
+if (i.productId) {
+  product = await productModel.findById(i.productId);
+} else if (i.productName) {
+  const productName = i.productName?.trim();
+  product = await productModel.findOne({ 
+    title: { $regex: new RegExp(`^${productName}$`, 'i') } 
+  });
+}
+console.log('Fetched product:', product);
+console.log('product.ownerId:', product.ownerId);
+
+if (!product) {
+  throw new Error(`Product not found: ${i.productId || i.productName}`);
+}
+
+  return {
+          productName: product.title,
+          productId: product._id,     
+          ownerId: product.ownerId,   
+          quantity: i.quantity,
+          totalCost: product.price * i.quantity
+         };
+
         }))
 
         const order = new  orderModel({
@@ -42,11 +60,24 @@ const createOrder = async (req,res)=>{
 
 const getAllOrder = async (req, res) => {
   try {
-    const orders = await orderModel.find()
-      .populate('customerId', 'name email')        
-      .populate('item.productId', 'productName price') 
-      .populate('item.ownerId', 'name email');     
+    const rawOrders = await orderModel.find();
+    console.log("➡️ Raw orders from DB:", JSON.stringify(rawOrders, null, 2));
+    const orders = await orderModel.find().populate('customerId', 'fullName email').populate('item.productId', 'title price')
+  //     const orders = await orderModel.find()
+  // .populate({
+  //   path: 'customerId',
+  //   select: 'fullName email'
+  // })
+  // .populate({
+  //   path: 'item.productId',
+  //   select: 'title price'
+  // })
+  // .populate({
+  //   path: 'item.ownerId',
+  //   select: 'fullName email'
+  // });
 
+      
     res.status(200).send(orders);
   } catch (error) {
     res.status(500).send({
