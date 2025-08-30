@@ -65,12 +65,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4N
 
 ###
 
-PATCH http://localhost:5000/order/68a87b1b175af6694f7d374e
+PATCH http://localhost:5000/order/68ac97bd558a951171c5b8aa
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTg3MzQzOH0.w6M9zKjgQwFTSmI6z-DgMu8ggC34TxMYxGkcufAC-k8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NjU4NTE1N30.gdQ9mBZ2BFL-E9F2Fbk39rmEtBf6Td3B0SpzNMrFGEk
 
 {
-  "shippingStatus": "shipped"
+  "shippingStatus": "delivered"
 }
 
 ###
@@ -78,3 +78,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4N
 GET http://localhost:5000/order/68a87b1b175af6694f7d374e
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NTg3MzQzOH0.w6M9zKjgQwFTSmI6z-DgMu8ggC34TxMYxGkcufAC-k8 
+
+
+###
+
+GET http://localhost:5000/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NmVlYjI1MGNiMTZiZGUxYjY1M2UiLCJlbWFpbCI6ImRvcGU5ODU3N0BnbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NTY1ODQ3ODJ9.iAvfgiV7oiy68r4ln9PoD9rz0wO50gXqs8Kscdj91YE
+
+
+### 
+
+GET http://localhost:5000/order-history
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NmVlYjI1MGNiMTZiZGUxYjY1M2UiLCJlbWFpbCI6ImRvcGU5ODU3N0BnbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NTY1ODQ3ODJ9.iAvfgiV7oiy68r4ln9PoD9rz0wO50gXqs8Kscdj91YE
+

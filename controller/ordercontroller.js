@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const productModel = require('../schema/productschema');
 const orderModel = require('../schema/order')
+const ioServer = require('../app')
 
 
 const createOrder = async (req,res)=>{
@@ -35,7 +36,7 @@ if (!product) {
 }
 
   return {
-          productName: product.title,
+          productName: product.title || product._id,
           productId: product._id,     
           ownerId: product.ownerId,   
           quantity: i.quantity,
@@ -121,6 +122,15 @@ const updateShippingStatus = async (req, res) => {
 
     await order.save();
 
+   
+
+    req.io.emit("order_shipping_status_update",
+            {
+                "title": "New shipping status",
+                "message": "Your last order shipping status has been updated to " + shippingStatus,
+            }, order.ownerId);
+
+
     return res.status(200).send({ message: 'Status updated successfully' });
   } catch (error) {
     return res.status(500).send({
@@ -128,10 +138,12 @@ const updateShippingStatus = async (req, res) => {
       error: error.message,
     });
   }
-};
+}  
+
 
 
 module.exports = {
+    
     createOrder,
     getAllOrder,
     getOrderById,
