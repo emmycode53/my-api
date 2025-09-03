@@ -70,7 +70,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NjU4NTE1N30.gdQ9mBZ2BFL-E9F2Fbk39rmEtBf6Td3B0SpzNMrFGEk
 
 {
-  "shippingStatus": "delivered"
+  "shippingStatus": "shipped"
 }
 
 ###
@@ -91,5 +91,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4N
 
 GET http://localhost:5000/order-history
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NmVlYjI1MGNiMTZiZGUxYjY1M2UiLCJlbWFpbCI6ImRvcGU5ODU3N0BnbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NTY1ODQ3ODJ9.iAvfgiV7oiy68r4ln9PoD9rz0wO50gXqs8Kscdj91YE
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NTcyMDNjOTExYjJjMzg0YmE2YzQiLCJlbWFpbCI6ImlzYWFjZW1tYW51ZWwxOTEzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NjgxNDExNX0.2gc3XLkMhH4jjIfulo5Bi4XWG4er8T9BJii36-xXln8

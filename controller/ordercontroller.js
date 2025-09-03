@@ -28,8 +28,6 @@ if (i.productId) {
     title: { $regex: new RegExp(`^${productName}$`, 'i') } 
   });
 }
-console.log('Fetched product:', product);
-console.log('product.ownerId:', product.ownerId);
 
 if (!product) {
   throw new Error(`Product not found: ${i.productId || i.productName}`);
@@ -62,7 +60,6 @@ if (!product) {
 const getAllOrder = async (req, res) => {
   try {
     const rawOrders = await orderModel.find();
-    console.log("➡️ Raw orders from DB:", JSON.stringify(rawOrders, null, 2));
     const orders = await orderModel.find().populate('customerId', 'fullName email').populate('item.productId', 'title price')
   //     const orders = await orderModel.find()
   // .populate({
@@ -122,13 +119,25 @@ const updateShippingStatus = async (req, res) => {
 
     await order.save();
 
+    req.io.to(order.customerId.toString()).emit("order_shipping_status_update", {
+  title: "New shipping status",
+  message: `Your shipping status has been updated to ${shippingStatus}`,
+  newStatus: shippingStatus
+  });
+
+
    
 
-    req.io.emit("order_shipping_status_update",
-            {
-                "title": "New shipping status",
-                "message": "Your last order shipping status has been updated to " + shippingStatus,
-            }, order.ownerId);
+  //   req.io.to(order.customerId).emit("order_shipping_status_update", {
+  // "title": "New shipping status",
+  // "message": `Your  shipping status has been updated to ${shippingStatus}`,
+  // },order.customerId);
+
+    // req.io.emit("order_shipping_status_update",
+    //         {
+    //             "title": "New shipping status",
+    //             "message": "Your last order shipping status has been updated to " + shippingStatus,
+    //         }, order.ownerId);
 
 
     return res.status(200).send({ message: 'Status updated successfully' });

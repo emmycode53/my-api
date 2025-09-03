@@ -36,25 +36,35 @@ app.use('/order-history', getOrderHistoryRoutes);
 app.use('/profile', getProfileRoute);
 
 
-
-
-
 ioServer.on("connection", (socket) => {
-  socket.on('join-room', (userId) => {
-    socket.join(userId);
-    console.log(`User ${socket.id} joined room: ${userId}`);
-  });
+  console.log(`⚡ New client connected: ${socket.id}`);
 
-  socket.on('order_shipping_status_update', (data, room) => {
-      if(room !== ''){
-          socket.to(room).emit('order_shipping_status_update', data);
-      }
+  socket.on("join-room", ({ customerId }) => {
+    if (!customerId) {
+      console.log(`❌ No customerId provided for socket ${socket.id}`);
+      return;
+    }
+
+    socket.userId = customerId;
+
+    
+    socket.join(customerId.toString());
+
+    console.log(`✅ User ${socket.id} joined room: ${customerId}`);
+
+
+    console.log("📂 Rooms for this socket:", Array.from(socket.rooms));
   });
 
   socket.on("disconnect", () => {
-    console.log(`❌ User ${decoded.userId} disconnected`);
+    console.log(`❌ User ${socket.userId || socket.id} disconnected`);
   });
 });
+
+
+
+
+
 
 
 mongoose.connect(process.env.MONGO_ATLAS_URL)
